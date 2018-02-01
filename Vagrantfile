@@ -67,8 +67,13 @@ Vagrant.configure("2") do |config|
      apt-get purge openjdk*
      add-apt-repository ppa:webupd8team/java
      apt-get update
-     apt-get install -y git oracle-java8-installer
-     wget -O /opt/eclipse-inst-linux64 http://eclipse.c3sl.ufpr.br/oomph/epp/oxygen/R2/eclipse-inst-linux64.tar.gz   
+     apt-get -y upgrade
+     apt-get install -y git
+     echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections 
+     echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
+     apt-get -y install oracle-java8-installer
+     apt-get install -y lightdm virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
+     wget -O /opt/eclipse-inst-linux64.tar.gz http://eclipse.c3sl.ufpr.br/oomph/epp/oxygen/R2/eclipse-inst-linux64.tar.gz   
      cd /opt/ 
      tar -zxvf eclipse-inst-linux64.tar.gz   
   SHELL
